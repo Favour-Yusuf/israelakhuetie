@@ -96,9 +96,11 @@ export default function Footer() {
             </div>
 
             {/* MADE WITH LOVE */}
+           <Link href= "">
             <span className="text-xs text-white/50">
               Made with ❤️ and intention
             </span>
+           </Link>
           </div>
         </div>
       </div>

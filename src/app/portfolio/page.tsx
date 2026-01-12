@@ -108,7 +108,7 @@ export default function PortfolioPage() {
               />
 
               <DriveCard
-                image="https://res.cloudinary.com/dcuad6p9z/image/upload/v1768208518/Portfolio%20Visuals%281%29/Washtrack_2_cxbpw4.png"
+                image="https://res.cloudinary.com/dcuad6p9z/image/upload/v1768208499/Portfolio%20Visuals%281%29/Paid_Media_Washtrack_dhtrac.png"
                 title="Washtrack"
                 subtitle="Meta Ads · App Install"
                 bullets={[
@@ -167,7 +167,7 @@ export default function PortfolioPage() {
                 subtitle="Website Copy"
                 industry="Saas"
                 onOpen={() =>
-                  openPdf("/pdfs/shopmammy.pdf", "ShopMammy Website Copy")
+                  openPdf("/pdfs/Shop Mammy.pdf", "ShopMammy Website Copy")
                 }
               />
 
@@ -314,7 +314,7 @@ export default function PortfolioPage() {
     <DriveCard
       image="https://res.cloudinary.com/dcuad6p9z/image/upload/v1768208518/Portfolio%20Visuals%281%29/Washtrack_rd7kai.png"
       title="WashTrack"
-      subtitle="SaaS · Social Media Management (10.2025 – Present)"
+      subtitle="SaaS · Social Media Management (10.2025 – 12.2025)"
       bullets={[
         "Campaign ideation & activity planning",
         "Content planning & strategy",

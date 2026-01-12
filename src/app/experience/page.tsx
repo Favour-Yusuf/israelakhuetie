@@ -60,7 +60,7 @@ const tools = [
   "notion",
   "zapier",
   "make",
-  "typeform",
+  "Typeform",
   "meta",
   
 ];
