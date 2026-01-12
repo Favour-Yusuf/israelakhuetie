@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Linkedin, Instagram, Mail } from "lucide-react";
+import { Linkedin, Instagram, Mail, X } from "lucide-react";
 import { useState } from "react";
 
 export default function ContactPage() {
@@ -13,9 +13,49 @@ export default function ContactPage() {
     message: "",
   });
 
-  const mailtoLink = `mailto:akhuetieisrael04@gmail.com?subject=Contact from ${form.name}&body=${encodeURIComponent(
-    `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`
-  )}`;
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const isValid =
+    form.name.trim() !== "" &&
+    form.email.trim() !== "" &&
+    form.message.trim() !== "";
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValid) return;
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        "https://formsubmit.co/ajax/akhuetieisrael04@gmail.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            message: form.message,
+            _subject: "New contact from portfolio",
+            _template: "table",
+          }),
+        }
+      );
+
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", message: "" });
+      }
+    } catch (error) {
+      console.error("Form submission error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -24,7 +64,7 @@ export default function ContactPage() {
       <main className="bg-[#FFF6E5] min-h-screen pt-40 px-6 pb-24">
         <div className="max-w-6xl mx-auto">
 
-          {/* ================= HEADER ================= */}
+          {/* HEADER */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,10 +79,10 @@ export default function ContactPage() {
             </p>
           </motion.div>
 
-          {/* ================= CONTENT ================= */}
+          {/* CONTENT */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
 
-            {/* LEFT SIDE */}
+            {/* LEFT */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -55,18 +95,23 @@ export default function ContactPage() {
                 to connect — I’m always open to meaningful conversations.
               </p>
 
-              {/* CONTACT INFO */}
-              <div className="space-y-4">
-                <a
-                  href="mailto:akhuetieisrael04@gmail.com"
-                  className="flex items-center gap-3 text-[#1F2A44] font-semibold hover:text-yellow-600 transition"
-                >
-                  <Mail size={20} />
-                  akhuetieisrael04@gmail.com
-                </a>
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-[#1F2A44]">
+                  Expected response time
+                </p>
+                <p className="text-sm text-[#1F2A44]/70">
+                  Within 24 hours
+                </p>
               </div>
 
-              {/* SOCIALS */}
+              <a
+                href="mailto:akhuetieisrael04@gmail.com"
+                className="flex items-center gap-3 text-[#1F2A44] font-semibold hover:text-yellow-600 transition"
+              >
+                <Mail size={20} />
+                akhuetieisrael04@gmail.com
+              </a>
+
               <div className="flex gap-6 pt-6">
                 <a
                   href="https://www.linkedin.com/in/israelakhuetie/"
@@ -86,7 +131,7 @@ export default function ContactPage() {
               </div>
             </motion.div>
 
-            {/* RIGHT SIDE – FORM */}
+            {/* FORM */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -94,7 +139,7 @@ export default function ContactPage() {
               transition={{ duration: 0.8 }}
               className="bg-white rounded-2xl p-8 shadow-xl"
             >
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="text-sm font-semibold text-[#1F2A44]">
                     Name
@@ -105,8 +150,7 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, name: e.target.value })
                     }
-                    className="mt-2 w-full px-4 py-3 rounded-lg border border-[#1F2A44]/20 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    placeholder="Your name"
+                    className="mt-2 w-full px-4 py-3 text-black rounded-lg border border-[#1F2A44]/20 focus:ring-2 focus:ring-yellow-400"
                   />
                 </div>
 
@@ -120,8 +164,7 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, email: e.target.value })
                     }
-                    className="mt-2 w-full px-4 py-3 rounded-lg border border-[#1F2A44]/20 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    placeholder="you@example.com"
+                    className="mt-2 w-full text-black px-4 py-3 rounded-lg border border-[#1F2A44]/20 focus:ring-2 focus:ring-yellow-400"
                   />
                 </div>
 
@@ -135,17 +178,22 @@ export default function ContactPage() {
                     onChange={(e) =>
                       setForm({ ...form, message: e.target.value })
                     }
-                    className="mt-2 w-full px-4 py-3 rounded-lg border border-[#1F2A44]/20 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                    placeholder="Tell me about your project or idea..."
+                    className="mt-2 w-full text-black px-4 py-3 rounded-lg border border-[#1F2A44]/20 focus:ring-2 focus:ring-yellow-400"
                   />
                 </div>
 
-                <a
-                  href={mailtoLink}
-                  className="inline-flex items-center justify-center w-full bg-[#1F2A44] text-white font-semibold py-4 rounded-lg hover:bg-[#162033] transition"
+                <button
+                  type="submit"
+                  disabled={!isValid || loading}
+                  className={`w-full py-4 rounded-lg font-semibold transition
+                    ${
+                      isValid
+                        ? "bg-[#1F2A44] text-white hover:bg-[#162033]"
+                        : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    }`}
                 >
-                  Send Email →
-                </a>
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
               </form>
             </motion.div>
           </div>
@@ -153,6 +201,47 @@ export default function ContactPage() {
       </main>
 
       <Footer />
+
+      {/* THANK YOU MODAL */}
+      <AnimatePresence>
+        {submitted && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-50"
+              onClick={() => setSubmitted(false)}
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-50 flex items-center justify-center px-6"
+            >
+              <div className="bg-white max-w-md w-full rounded-2xl p-8 relative shadow-xl text-center">
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="absolute top-4 right-4 text-gray-400 hover:text-black"
+                >
+                  <X size={18} />
+                </button>
+
+                <h3 className="text-2xl font-bold text-[#1F2A44] mb-4">
+                  Thanks for reaching out 👋
+                </h3>
+
+                <p className="text-[#1F2A44]/80 leading-relaxed">
+                  Your message has been sent successfully.
+                  I’ll get back to you within 24 hours.
+                </p>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }

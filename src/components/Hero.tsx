@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "./Navbar";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
 
 const text = "Hello, I’m";
 
@@ -42,14 +44,14 @@ export default function Hero() {
             </h1>
 
             <div className="w-80 h-80 rounded overflow-hidden">
-                <Image
-                  src="/original LinkedIn profile.png"
-                  alt="Israel"
-                  width={320}
-                  height={320}
-                  className="object-cover"
-                />
-              </div>
+              <Image
+                src="/original LinkedIn profile.png"
+                alt="Israel"
+                width={320}
+                height={320}
+                className="object-cover"
+              />
+            </div>
 
             <h2 className="mt-6 text-2xl font-bold text-[#1F2A44]">
               Digital Marketer
@@ -68,7 +70,7 @@ export default function Hero() {
               Based in Nigeria, Working Worldwide
             </p>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center md:hidden gap-4">
               {["Resume", "Portfolio", "About", "Experience", "Contact"].map(
                 (btn) => (
                   <button
@@ -102,30 +104,59 @@ export default function Hero() {
               </h2>
 
               <p className="mt-6 max-w-lg text-[#1F2A44]/80">
-                “Israel delivers. I've watched him generate leads from Meta Ads
-                and drive app installs with consistent success.”
+                “I worked with Israel on an info business in the debt recovery
+                space, where he handled the copy and led the entire funnel
+                strategy and build. He has a strong grasp of positioning and
+                knows how to connect messaging, offer, and funnel flow into a
+                clear path to conversion.”
               </p>
 
               <p className="mt-2 font-semibold text-[#1F2A44]">
-                — Favour Ekenne, CEO, Juba Africa
+                 — Favour Ekenne, Founder, Juba Africa
               </p>
 
               <p className="mt-6 text-sm text-[#1F2A44]/70">
                 Based in Nigeria, Working Worldwide
               </p>
 
-              <div className="mt-8 flex gap-4">
-                {["Resume", "Portfolio", "About", "Experience", "Contact"].map(
-                  (btn) => (
-                    <button
-                      key={btn}
-                      className="bg-yellow-400 px-6 py-2 rounded-md font-semibold"
-                    >
-                      {btn}
-                    </button>
-                  )
-                )}
-              </div>
+            <div className="mt-8 flex flex-wrap justify-center gap-4 md:hidden">
+  <Link
+    href="/resume"
+    className="bg-yellow-400 px-5 py-2 rounded-md font-semibold text-[#1F2A44]"
+  >
+    Resume
+  </Link>
+
+  <Link
+    href="/portfolio"
+    className="bg-yellow-400 px-5 py-2 rounded-md font-semibold text-[#1F2A44]"
+  >
+    Portfolio
+  </Link>
+
+  <Link
+    href="/about"
+    className="bg-yellow-400 px-5 py-2 rounded-md font-semibold text-[#1F2A44]"
+  >
+    About
+  </Link>
+
+  <Link
+    href="/experience"
+    className="bg-yellow-400 px-5 py-2 rounded-md font-semibold text-[#1F2A44]"
+  >
+    Experience
+  </Link>
+
+  <Link
+    href="/contact"
+    className="bg-yellow-400 px-5 py-2 rounded-md font-semibold text-[#1F2A44]"
+  >
+    Contact
+  </Link>
+</div>
+
+
             </div>
 
             <div className="flex justify-center">
