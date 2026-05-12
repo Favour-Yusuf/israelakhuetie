@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Israel Akhuetie - Portfolio",
-  description: "Marketer. Copywriter. Funnel Builder.",
+  title: "Zubaa - Social Media Agency",
+  description: "Zubaa is a social media agency that helps businesses build a strong online presence.",
 };
 
 export default function RootLayout({
