@@ -1,9 +1,9 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Navbar from "@/old-components/Navbar";
-import Footer from "@/old-components/Footer";
-import PortfolioTabs from "@/old-components/PortfolioTabs";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import PortfolioTabs from "@/components/PortfolioTabs";
 import Image from "next/image";
 import { useState } from "react";
 

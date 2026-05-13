@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import Navbar from "@/old-components/Navbar";
-import Footer from "@/old-components/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Linkedin, Instagram, Mail, X } from "lucide-react";
 import { useState } from "react";
 
